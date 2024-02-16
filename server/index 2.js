@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const config = require("./config/dev");
 const FakeDb = require("./fake-db");
 const productRoutes = require("./routes/products");
@@ -12,9 +11,12 @@ mongoose.connect(config.DB_URI).then(() => {
 });
 
 const app = express();
-app.use(bodyParser.json({ type: "application/*+json" }));
 
 app.use("/api/v1/products", productRoutes);
+
+// app.get("/products", function (req, res) {
+//   res.json({ success: true });
+// });
 
 const PORT = process.env.PORT || "3001";
 
